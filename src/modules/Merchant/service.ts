@@ -49,8 +49,6 @@ cloudinary.config({
 
 
 export class MerchantService {
-    private ETZ_BVN = process.env.ETZ_BVN;
-
     // private _emailQueue = new EmailQueue();
     private _emailService = new sendGridService();
     // private _emailService = new sendMailService();
