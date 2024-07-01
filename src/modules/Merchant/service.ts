@@ -7,7 +7,7 @@ import { sendGridService } from '../../integrations/mails/sendgrid/service';
 
 // import { sendMailService } from '../../thirdParty/mails/mandrill/service';
 
-import { twilioService } from '../../integrations/sms/twilio/service';
+// import { twilioService } from '../../integrations/sms/twilio/service';
 import { MerchantModel, MerchantActivateModel, MerchantInviteModel } from './model';
 
 import { TODAYS_DATE,GENERATE_STRING, GENERATE_OTP_CODE, INVITE_STATUS } from '../../utils/constants';
@@ -55,7 +55,7 @@ export class MerchantService {
     private _emailService = new sendGridService();
     // private _emailService = new sendMailService();
 
-    private _smsService = new twilioService();
+    // private _smsService = new twilioService();
 
     _pushResponse = [];
 
@@ -233,14 +233,14 @@ export class MerchantService {
                             if(messageToInvite != null) {
                                 await this._sendEmail(email, 'Pottle Account Access', messageToInvite);
                             }
-                            let parsedPhone = phoneNumber.toString();
+                            // let parsedPhone = phoneNumber.toString();
 
-                            const toPhoneNumber = "+234"+parsedPhone.substring(1);
-                            console.log("to Phone Number", toPhoneNumber);
-                            const smsMessage = `Hi ${merchant.firstName},\nGamification OTP Code: ${otpCode}`;
-                            // SEND SMS
-                            let sendSMS = await this._smsService.sendSMS(String(toPhoneNumber), smsMessage);
-                            console.log("send sms", sendSMS);
+                            // const toPhoneNumber = "+234"+parsedPhone.substring(1);
+                            // console.log("to Phone Number", toPhoneNumber);
+                            // const smsMessage = `Hi ${merchant.firstName},\nGamification OTP Code: ${otpCode}`;
+                            // // SEND SMS
+                            // let sendSMS = await this._smsService.sendSMS(String(toPhoneNumber), smsMessage);
+                            // console.log("send sms", sendSMS);
                             const saveVerify = await merchantVerify.save();
                             if(saveVerify) {
                                 return { success: true, statusCode: 200, message: "Verification code successfully sent.", data: saveVerify };
