@@ -172,7 +172,7 @@ io.on('connection', (socket) => {
   });
 });
 
-// const port = process.env.PORT || 3001;
-const port = process.env.PORT || 8080;
+// const port = process.env.PORT || 8080;
+const port = 8080;
 app.listen(port, ()=> console.log(`MerchantPro API is running on Port ${port}`));
 io.listen(3006);
