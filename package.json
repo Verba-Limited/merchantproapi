@@ -6,7 +6,8 @@
   "scripts": {
     "test": "mocha -r ts-node/register -r tsconfig-paths/register 'src/test/*.ts' --timeout 10000",
     "start": "tsc -p tsconfig.json && nodemon dist/index.js",
-    "dev": "tsc -w & nodemon dist/index.js"
+    "dev": "tsc -w & nodemon dist/index.js",
+    "build": "tsc -p tsconfig.json"
   },
   "repository": {
     "type": "git",
