@@ -1,4 +1,5 @@
 import express, {urlencoded, Request, Response, NextFunction} from 'express';
+import serverless from "serverless-http";
 import cors from 'cors';
 import mongoose, {connect} from "mongoose";
 import { json } from 'body-parser';
@@ -176,3 +177,4 @@ io.on('connection', (socket) => {
 const port = process.env.PORT || 8080;
 app.listen(port, ()=> console.log(`MerchantPro API is running on Port ${port}`));
 io.listen(3006);
+export const handler = serverless(app);

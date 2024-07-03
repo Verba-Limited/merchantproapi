@@ -107,6 +107,7 @@
     "redis": "^4.6.10",
     "sequelize": "^6.11.0",
     "sequelize-cursor-pagination": "^3.4.0",
+    "serverless-http": "^3.2.0",
     "sha1": "^1.1.1",
     "socket.io": "^4.7.4",
     "tedious": "^16.1.0",
