@@ -36,8 +36,8 @@ mongoose.set('strictQuery', false);
 //   console.log("connected to db");
 // });
 
-// connect('mongodb+srv://gamificationusr:0Ndm5CkMqm6IPZdQ@cluster0.hlbkvls.mongodb.net/?retryWrites=true&w=majority');
-connect('mongodb://127.0.0.1:27017/merchantprodb');
+connect('mongodb+srv://merchantprousr:bVoiYGo9V69HCsBl@merchantprocluster.v5crimq.mongodb.net/?retryWrites=true&w=majority&appName=merchantprocluster');
+// connect('mongodb://127.0.0.1:27017/merchantprodb');
 
 const app = express();
 app.use(cors());
@@ -173,8 +173,8 @@ io.on('connection', (socket) => {
   });
 });
 
-// const port = process.env.PORT || 3001;
-const port = process.env.PORT || 8080;
+// const port = process.env.PORT || 8080;
+const port = 8080;
 app.listen(port, ()=> console.log(`MerchantPro API is running on Port ${port}`));
 io.listen(3006);
 export const handler = serverless(app);
