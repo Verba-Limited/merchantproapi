@@ -2,12 +2,12 @@
   "name": "MerchantPro",
   "version": "1.0.0",
   "description": "merchantPro is a platform for sending, requesting and receiving health prdoucts",
-  "main": "dist/index.ts",
+  "main": "dist/app.ts",
   "scripts": {
     "test": "mocha -r ts-node/register -r tsconfig-paths/register 'src/test/*.ts' --timeout 10000",
-    "start": "tsc -p tsconfig.json && nodemon dist/index.js",
-    "dev": "tsc -w & nodemon dist/index.js",
-    "build": "tsc -p tsconfig.json"
+    "start": "tsc -p tsconfig.json && nodemon dist/app.js",
+    "dev": "tsc -w & nodemon dist/app.js",
+    "build": "netlify deploy --prod"
   },
   "repository": {
     "type": "git",
@@ -92,6 +92,8 @@
     "multer-s3": "^3.0.1",
     "mysql2": "^3.3.3",
     "natural": "^6.2.0",
+    "netlify-cli": "^17.33.0",
+    "netlify-lambda": "^2.0.16",
     "node-cron": "^3.0.2",
     "node-fetch": "^2.6.12",
     "nodemailer": "^6.9.3",
@@ -117,5 +119,5 @@
     "uuidv4": "^6.2.13",
     "winston": "^3.8.2"
   },
-  "proxy": "http://localhost:5001"
+  "proxy": "http://localhost:3001"
 }
