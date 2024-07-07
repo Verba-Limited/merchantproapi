@@ -178,5 +178,5 @@ const port = process.env.PORT || 8080;
 app.listen(port, ()=> console.log(`MerchantPro API is running on Port ${port}`));
 // io.listen(3006);
 
-app.use("/.netlify/functions/app/api/users", userRoutes);
+app.use("/.netlify/functions/app", userRoutes);
 export const handler = serverless(app);
