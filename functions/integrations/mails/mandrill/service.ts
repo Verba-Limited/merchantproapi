@@ -45,7 +45,7 @@ export class sendMailService {
 
         var smtpTransport = nodemailer.createTransport(mandrillTransport({
             auth: {
-                apiKey: "md-WD3XmbI35NTJoee0tqUw4g"
+                apiKey: "md-xxxxxxxxxxxxxx"
             }
         }));
 
