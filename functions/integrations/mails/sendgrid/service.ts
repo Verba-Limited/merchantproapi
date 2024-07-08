@@ -50,7 +50,7 @@ export class sendGridService {
 
             // const apiKey = SENDGRID_API_KEY;
             // sgMail.setApiKey(apiKey)
-            sgMail.setApiKey("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")
+            sgMail.setApiKey("xxxxxxxxx")
             const msg = {
                 to: to, // Change to your recipient
                 from: 'oyekanmi.owolabi@etranzactng.com', // Change to your verified sender
