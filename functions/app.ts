@@ -1,42 +1,47 @@
-import express, {urlencoded, Request, Response, NextFunction} from 'express';
+import express, { urlencoded, Request, Response, NextFunction } from "express";
 import serverless from "serverless-http";
-import cors from 'cors';
-import mongoose, {connect} from "mongoose";
-import { json } from 'body-parser';
-import path from 'path';
+import cors from "cors";
+import mongoose, { connect } from "mongoose";
+import { json } from "body-parser";
+import path from "path";
 
 import cookieSession from "cookie-session";
 import passport from "passport";
 
-import { MONGO_URI, COOKIE_KEY } from './utils/secrets';
+import { MONGO_URI, COOKIE_KEY } from "./utils/secrets";
 
 // import { DB } from "./shared/database";
 // import { logger } from "./utils/logger";
 
-import userRoutes from './modules/User/route';
-import authRoutes from './modules/AuthenticateUser/route';
-import authMerchantRoutes from './modules/AuthenticateMerchant/route';
-import organizationRoutes from './modules/Organization/route';
-import productRoutes from './modules/Product/route';
-import merchantRoutes from './modules/Merchant/route';
+import userRoutes from "./modules/User/route";
+import authRoutes from "./modules/AuthenticateUser/route";
+import authMerchantRoutes from "./modules/AuthenticateMerchant/route";
+import organizationRoutes from "./modules/Organization/route";
+import productRoutes from "./modules/Product/route";
+import merchantRoutes from "./modules/Merchant/route";
 
 // import uploadRoutes from './modules/Upload/route';
 
-require('./modules/AuthenticateUser/passportUser');
-require('./modules/AuthenticateUser/passportGoogleUser');
-require('./modules/AuthenticateMerchant/passportMerchant');
-require('./modules/AuthenticateMerchant/passportGoogleMerchant');
+require("./modules/AuthenticateUser/passportUser");
+require("./modules/AuthenticateUser/passportGoogleUser");
+require("./modules/AuthenticateMerchant/passportMerchant");
+require("./modules/AuthenticateMerchant/passportGoogleMerchant");
 
 // const http = require('http');
 // const socketIo = require('socket.io');
 // const natural = require('natural');
 
-mongoose.set('strictQuery', false);
+mongoose.set("strictQuery", false);
 // connect(MONGO_URI, () => {
 //   console.log("connected to db");
 // });
 
-connect('mongodb+srv://merchantprousr:bVoiYGo9V69HCsBl@merchantprocluster.v5crimq.mongodb.net/?retryWrites=true&w=majority&appName=merchantprocluster');
+connect(
+  "mongodb+srv://merchantprousr:bVoiYGo9V69HCsBl@merchantprocluster.v5crimq.mongodb.net/?retryWrites=true&w=majority&appName=merchantprocluster",
+  () => {
+    console.log("connected");
+  }
+);
 
 const app = express();
 app.use(cors());
@@ -73,9 +78,8 @@ app.use(cors());
 //   history: ["transaction", "history"]
 // };
 
-
 app.use(json());
-app.use(urlencoded({ extended: true, }));
+app.use(urlencoded({ extended: true }));
 
 // setting up cookieSession
 app.use(
@@ -98,7 +102,7 @@ app.use(passport.session());
 // app.use('/api/products', productRoutes);
 // app.use('/api/merchant', merchantRoutes);
 
-const buildPath = path.normalize(path.join(__dirname, '../client/build'));
+const buildPath = path.normalize(path.join(__dirname, "../client/build"));
 app.use(express.static(buildPath));
 
 // app.use(express.static(__dirname));
@@ -107,32 +111,30 @@ app.use(express.static(buildPath));
 //     res.send("Welcome to BillOn.")
 // });
 
-app.get('(/*)?', async (req, res, next) => {
-    res.sendFile(path.join(buildPath, 'index.html'));
+app.get("(/*)?", async (req, res, next) => {
+  res.sendFile(path.join(buildPath, "index.html"));
 });
 
-app.use('/static', express.static(path.join(__dirname, 'public')))
-
+app.use("/static", express.static(path.join(__dirname, "public")));
 
 // app.use((err: Error, req: Request, res:Response, next: NextFunction) => {
 //     res.status(500).json({ success: false,  statusCode: 500, message: err.message, data: null });
 // });
 
 // Error handling middleware
-app.use((err: Error, req: Request, res:Response, next: NextFunction) => {
+app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
   if (err instanceof mongoose.Error.ValidationError) {
-      const errors = Object.keys(err.errors).map(key => ({
-          field: key,
-          message: err.errors[key].message
-      }));
-      return res.status(400).json({
-          status: 'error',
-          errors
-      });
+    const errors = Object.keys(err.errors).map((key) => ({
+      field: key,
+      message: err.errors[key].message,
+    }));
+    return res.status(400).json({
+      status: "error",
+      errors,
+    });
   }
   next(err);
 });
-
 
 // WebSocket connection
 // io.on('connection', (socket) => {
@@ -161,7 +163,7 @@ app.use((err: Error, req: Request, res:Response, next: NextFunction) => {
 //       console.log("===============bot prediction====================");
 //       console.log(prediction);
 //       console.log("===============end bot prediction================");
-      
+
 //       // Send the predicted category back to the client
 //       socket.emit('category prediction', { username: 'bot', message: prediction });
 //   });
@@ -174,7 +176,9 @@ app.use((err: Error, req: Request, res:Response, next: NextFunction) => {
 
 // const port = process.env.PORT || 3001;
 const port = process.env.PORT || 8080;
-app.listen(port, ()=> console.log(`MerchantPro API is running on Port ${port}`));
+app.listen(port, () =>
+  console.log(`MerchantPro API is running on Port ${port}`)
+);
 // io.listen(3006);
 
 app.use("/.netlify/functions/app", userRoutes);
