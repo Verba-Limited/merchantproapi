@@ -108,7 +108,7 @@ app.use('/api/merchant', merchantRoutes);
 // app.use(express.static(__dirname));
 
 app.get('/', (req: any, res: any) => {
-    res.send("Welcome to MerchantPro API Services")
+    res.send("Welcome to MerchantPro API Services..")
 });
 
 // app.get("(/*)?", async (req, res, next) => {
