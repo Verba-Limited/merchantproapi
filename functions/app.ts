@@ -91,25 +91,25 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
-// app.use('/api/users', userRoutes);
-// app.use('/api/auth', authRoutes);
-// app.use('/api/merchant/auth', authMerchantRoutes);
-// app.use('/api/organizations', organizationRoutes);
-// app.use('/api/products', productRoutes);
-// app.use('/api/merchant', merchantRoutes);
+app.use('/api/users', userRoutes);
+app.use('/api/auth', authRoutes);
+app.use('/api/merchant/auth', authMerchantRoutes);
+app.use('/api/organizations', organizationRoutes);
+app.use('/api/products', productRoutes);
+app.use('/api/merchant', merchantRoutes);
 
-const buildPath = path.normalize(path.join(__dirname, '../client/build'));
-app.use(express.static(buildPath));
+// const buildPath = path.normalize(path.join(__dirname, '../client/build'));
+// app.use(express.static(buildPath));
 
 // app.use(express.static(__dirname));
 
-// app.get('/', (req: any, res: any) => {
-//     res.send("Welcome to BillOn.")
-// });
-
-app.get('(/*)?', async (req, res, next) => {
-    res.sendFile(path.join(buildPath, 'index.html'));
+app.get('/', (req: any, res: any) => {
+    res.send("Welcome to MerchantPro API Services")
 });
+
+// app.get('(/*)?', async (req, res, next) => {
+//     res.sendFile(path.join(buildPath, 'index.html'));
+// });
 
 app.use('/static', express.static(path.join(__dirname, 'public')))
 
