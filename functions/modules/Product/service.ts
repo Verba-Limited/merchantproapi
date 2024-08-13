@@ -41,7 +41,14 @@ export class ProductService {
         return { success: false, statusCode: 400, message: "Error in fetching Product Details", data: null };
     }
 
-    public updateProduct = async (userId:any, parsedBody: any) => {}
+    public updateProduct = async (productId:any, parsedBody: any) => {
+        let prodID = new ObjectId(productId);
+        const product = await ProductModel.findByIdAndUpdate(prodID, parsedBody, { new: true });
+        if (product) {
+            return { success: true, statusCode: 200, message: "Product successfully updated!", data: product };
+        }
+        return { success: false, statusCode: 400, message: "Error in updating Product", data: null };
+    }
 
     public deleteProduct = async (params:any) => {
         const { email, productId } = params;
