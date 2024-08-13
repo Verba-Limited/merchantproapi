@@ -32,9 +32,9 @@ export class ProductController extends BaseController {
         }
     }
 
-    public updateProduct = async (userId: any, parsedBody: any) => {
+    public updateProduct = async (productId: any, parsedBody: any) => {
         try {
-            const user = await this._productService.updateProduct(userId, parsedBody);
+            const user = await this._productService.updateProduct(productId, parsedBody);
             return user; 
         } catch (error) {
             return this.sendResponse(error);
