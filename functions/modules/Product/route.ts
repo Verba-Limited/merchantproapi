@@ -13,7 +13,7 @@ const Product = new ProductController();
 router.post('/', authenticate.required, orgIdApiKeyMiddleware(), call(Product.createProduct, (req: Request, res: Response, next: NextFunction) => [req.body, next]));
 router.get('/', authenticate.required, apiKeyMiddleware(), call(Product.getProducts, (req: Request, res: Response, next: NextFunction) => []));
 router.get('/:productId', authenticate.required, call(Product.getProductById, (req: Request, res: Response, next: NextFunction) => [req.params]));
-router.patch('/:userId', authenticate.required, call(Product.updateProduct, (req: Request, res: Response, next: NextFunction) => [req.params.userId, req.body]));
+router.patch('/:productId', authenticate.required, call(Product.updateProduct, (req: Request, res: Response, next: NextFunction) => [req.params.productId, req.body]));
 router.delete('/:email/:productId', call(Product.deleteProduct, (req: Request, res: Response, next: NextFunction) => [req.params]));
 
 export default router;
