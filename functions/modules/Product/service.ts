@@ -52,10 +52,18 @@ export class ProductService {
 
     public deleteProduct = async (params:any) => {
         const { email, productId } = params;
-        let prodID = new ObjectId(productId);
-        const user = await ProductModel.findOneAndDelete({ email, _id: prodID });
-        if(user) return { success: true, statusCode: 200, message: "Product successfully deleted!", data: user };
-        return { success: false, statusCode: 400, message: "Error in deleting Product", data: null };
+        const user = await UserModel.findOne({ email });
+        if(user) {
+            let prodId = new ObjectId(productId);
+            const product = await ProductModel.findByIdAndDelete(prodId);
+            if(product) {
+                return { success: true, statusCode: 200, message: "Product successfully deleted!", data: user };
+            }
+                return { success: false, statusCode: 400, message: "Error in deleting Product", data: null };
+        } else {
+            return { success: false, statusCode: 400, message: "User not found", data: null };
+        }
     }
+
 
 }
